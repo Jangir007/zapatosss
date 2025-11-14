@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapatos: Войлок Ручной Работы и Уют (Аккуратный дизайн)</title>
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Lobster (для заголовка) и Inter, Merriweather -->
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    
+    <!-- Конфигурация Tailwind для теплых цветов и шрифтов -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Основные теплые цвета
+                        'primary-brown': '#8B4513', // Saddle Brown (Более насыщенный коричневый)
+                        'accent-terracotta': '#CD853F', // Peru (Более приглушенный, элегантный терракот)
+                        'light-cream': '#FBF9F6', // Более чистый кремовый фон
+                        'dark-gray': '#3C4048', // Почти черный, но мягче
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'sans-serif'],
+                        'serif': ['Merriweather', 'serif'], // Более элегантный шрифт для заголовков
+                        'display': ['Lobster', 'cursive'], // Новый шрифт для заголовка Hero
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Иконки Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Общие стили */
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        :root{
+            --primary-brown: #8B4513;
+            --accent-terracotta: #CD853F;
+            --light-cream: #FBF9F6;
+            --dark-gray: #3C4048;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--light-cream);
+            color: var(--dark-gray);
+            margin: 0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Merriweather', serif;
+        }
+        
+        /* Переопределяем шрифт для главного заголовка */
+        .h1-lobster {
+             font-family: 'Lobster', cursive;
+        }
+
+        .header-sticky {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        /* Стили для Hero секции */
+        .hero-section {
+            position: relative;
+            background-color: var(--light-cream);
+            border-radius: 0 0 3rem 3rem;
+            overflow: hidden;
+        }
+        .hero-overlay {
+            background: linear-gradient(45deg, rgba(205,133,63,0.1), rgba(139,69,19,0.05));
+            z-index: 1;
+        }
+        .hero-content {
+            z-index: 10;
+            color: var(--dark-gray);
+        }
+        .hero-content h1 {
+            color: var(--primary-brown);
+        }
+        .hero-content p {
+            color: var(--dark-gray);
+        }
+        
+        /* Кнопки и ссылки */
+        .nav-link { color: var(--dark-gray); font-weight: 500; transition: color .3s ease; text-decoration: none; padding: 0.5rem 0.25rem; }
+        .nav-link:hover{ color: var(--accent-terracotta); }
+
+        .btn-primary-lg{
+            display:inline-block;
+            padding: 1rem 3rem;
+            font-size: 1.125rem;
+            color: var(--light-cream);
+            font-weight: 700;
+            background-color: var(--accent-terracotta);
+            border-radius: 9999px;
+            box-shadow: 0 10px 20px -8px rgba(139, 69, 19, 0.5); /* Более теплый коричневый для тени */
+            transition: transform .3s ease, background-color .3s ease;
+            text-decoration: none;
+        }
+        .btn-primary-lg:hover{ background-color: var(--primary-brown); transform: translateY(-2px); }
+
+        .btn-secondary{
+            display:inline-block;
+            padding: .6rem 1.75rem;
+            color: #fff;
+            background-color: var(--primary-brown);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 8px -2px rgba(0,0,0,0.1);
+            transition: background-color .3s ease;
+            text-decoration: none;
+        }
+        .btn-secondary:hover{ background-color: #A0522D; }
+
+        /* Заголовки секций */
+        .section-title{
+            font-size: 2.75rem; /* Немного крупнее */
+            font-weight: 700;
+            text-align: center;
+            color: var(--primary-brown);
+            margin-bottom: 3.5rem; /* Меньше отступ */
+        }
+        @media (max-width: 640px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        /* Стили Карточек (Для аккуратности) */
+        .feature-card, .product-card, .testimonial-card{
+            background-color: #ffffff; 
+            padding: 1.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.08); /* Чистая, не агрессивная тень */
+            transition: all .3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover, .product-card:hover{
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px -5px rgba(0,0,0,0.1);
+        }
+
+        /* Стиль для Карточек Отзывов */
+        .testimonial-card {
+            border-left: 5px solid var(--accent-terracotta);
+            text-align: left;
+        }
+
+        
+        .product-image-placeholder {
+            border-radius: 0.75rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary-brown);
+        }
+        
+        /* CSS для Плавного Появления Блоков (Fade-in on scroll) */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            /* Установлен более медленный переход, как просил пользователь */
+            transition: opacity 1.2s ease-out, transform 0.8s ease-out; 
+            transition-delay: 0.1s;
+        }
+
+        .fade-in.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / НАВИГАЦИЯ -->
+    <header class="header-sticky bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <a href="#hero" class="text-3xl font-serif font-extrabold text-primary-brown tracking-wide transition duration-300 hover:text-accent-terracotta h1-lobster">Zapatos</a>
+            
+            <!-- Десктопная навигация -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#hero" class="nav-link" data-i18n-key="nav.home">Главная</a>
+                <a href="#features" class="nav-link" data-i18n-key="nav.features">Преимущества</a>
+                <a href="#products" class="nav-link" data-i18n-key="nav.products">Коллекция</a>
+                <a href="#about" class="nav-link" data-i18n-key="nav.about">О нас</a>
+                <a href="#contact" class="nav-link" data-i18n-key="nav.contact">Контакты</a>
+            </nav>
+
+            <!-- Переводчик (Десктоп) -->
+            <div class="relative inline-block ml-4">
+                <button id="lang-switcher-btn" type="button" class="flex items-center px-3 py-2 text-sm font-medium text-primary-brown bg-light-cream rounded-lg hover:bg-gray-200 transition duration-300">
+                    <i class="fas fa-globe mr-2"></i>
+                    <span id="current-lang-label">RU</span>
+                    <i class="fas fa-chevron-down ml-2 text-xs"></i>
+                </button>
+                <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-xl z-50 border border-gray-200">
+                    <button class="lang-option w-full text-left px-4 py-2 hover:bg-light-cream transition duration-200" data-lang="ru">
+                        <i class="fas fa-check mr-2 text-accent-terracotta hidden"></i> Русский
+                    </button>
+                    <button class="lang-option w-full text-left px-4 py-2 hover:bg-light-cream transition duration-200" data-lang="en">
+                        <i class="fas fa-check mr-2 text-accent-terracotta hidden"></i> English
+                    </button>
+                    <button class="lang-option w-full text-left px-4 py-2 hover:bg-light-cream transition duration-200" data-lang="es">
+                        <i class="fas fa-check mr-2 text-accent-terracotta hidden"></i> Español
+                    </button>
+                    <button class="lang-option w-full text-left px-4 py-2 hover:bg-light-cream transition duration-200" data-lang="kk">
+                        <i class="fas fa-check mr-2 text-accent-terracotta hidden"></i> Қазақша
+                    </button>
+                </div>
+            </div>
+
+            <!-- Мобильное меню (иконка) -->
+            <div class="flex items-center md:hidden">
+                <button id="mobile-menu-button" class="text-primary-brown text-2xl p-2 rounded-lg hover:bg-light-cream">
+                    <!-- Иконка гамбургер-меню -->
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Мобильное меню (контент) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl">
+            <div class="px-2 pt-2 pb-3 space-y-2 sm:px-3 text-center">
+                <a href="#hero" class="block py-2 text-base font-medium text-dark-gray hover:bg-light-cream rounded-lg">Главная</a>
+                <a href="#features" class="block py-2 text-base font-medium text-dark-gray hover:bg-light-cream rounded-lg">Преимущества</a>
+                <a href="#products" class="block py-2 text-base font-medium text-dark-gray hover:bg-light-cream rounded-lg">Коллекция</a>
+                <a href="#about" class="block py-2 text-base font-medium text-dark-gray hover:bg-light-cream rounded-lg">О нас</a>
+                <a href="#contact" class="block py-2 text-base font-medium text-dark-gray hover:bg-light-cream rounded-lg">Контакты</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 1. HERO SECTION / ГЛАВНЫЙ ЭКРАН -->
+    <section id="hero" class="hero-section py-20 sm:py-32 md:py-48 lg:py-64">
+        <div class="hero-overlay absolute inset-0 rounded-b-[3rem]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-center items-center h-full hero-content">
+            
+            <!-- Контент отцентрирован -->
+            <div class="text-center max-w-4xl">
+                <!-- Заголовок в стиле Lobster -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-4 h1-lobster">
+                    Войлок от Zapatos.
+                    <span class="text-accent-terracotta block mt-4 font-normal font-serif">Тепло и Уют Ручной Работы.</span>
+                </h1>
+                <p class="text-lg sm:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+                    Мы создаем уникальные войлочные изделия с душой. Почувствуйте тепло и уют, созданные вручную.
+                </p>
+                <a href="#products" style="cursor: pointer;" class="btn-primary-lg">
+                    <i class="fas fa-shopping-bag mr-3"></i> Смотреть Коллекцию
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 2. ПРЕИМУЩЕСТВА (FEATURES) -->
+    <section id="features" class="bg-light-cream py-16 sm:py-24 border-b border-accent-terracotta/50 fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Почему наш Войлок?</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <!-- Блок 1 -->
+                <div class="feature-card">
+                    <i class="fas fa-hand-sparkles text-5xl text-accent-terracotta mb-4"></i>
+                    <h3 class="text-xl font-serif font-semibold text-primary-brown mb-2">Ручная работа</h3>
+                    <p class="text-gray-600">Каждое изделие создается с любовью и вниманием к деталям. Вы получаете уникальный предмет.</p>
+                </div>
+                
+                <!-- Блок 2 -->
+                <div class="feature-card">
+                    <i class="fas fa-leaf text-5xl text-accent-terracotta mb-4"></i>
+                    <h3 class="text-xl font-serif font-semibold text-primary-brown mb-2">Натуральные материалы</h3>
+                    <p class="text-gray-600">Используем только 100% натуральную шерсть без синтетики. Экологично и гипоаллергенно.</p>
+                </div>
+
+                <!-- Блок 3 -->
+                <div class="feature-card">
+                    <i class="fas fa-heart text-5xl text-accent-terracotta mb-4"></i>
+                    <h3 class="text-xl font-serif font-semibold text-primary-brown mb-2">Магия Уюта</h3>
+                    <p class="text-gray-600">Войлок "дышит", сохраняет тепло и дарит незабываемое ощущение домашнего комфорта.</p>
+                </div>
+
+                <!-- Блок 4 -->
+                <div class="feature-card">
+                    <i class="fas fa-star text-5xl text-accent-terracotta mb-4"></i>
+                    <h3 class="text-xl font-serif font-semibold text-primary-brown mb-2">Уникальный Дизайн</h3>
+                    <p class="text-gray-600">Неповторимые узоры и формы, которые вы не найдете в обычных магазинах.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. КОЛЛЕКЦИЯ (PRODUCTS) -->
+    <section id="products" class="bg-white py-16 sm:py-24 border-b border-accent-terracotta/50 fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Наши Шедевры</h2>
+            <p class="text-center text-lg text-gray-600 mb-12 max-w-3xl mx-auto">Выберите свой идеальный войлочный аксессуар — от уютных тапочек до стильных жилетов. Каждое изделие уникально.</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                
+                <!-- Карточка 1: Тапочки -->
+                <div class="product-card">
+                    <div class="aspect-video product-image-placeholder bg-accent-terracotta/10 text-xl font-bold p-8">
+                        <img src="img/img-1.jpg" alt="">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h3 class="text-2xl font-serif font-bold text-primary-brown mb-2">Уютные тапочки</h3>
+                        <p class="text-gray-600 mb-4">Хит продаж. Согреют ваши ноги после долгого дня.</p>
+                        <a href="#" class="btn-secondary">Купить</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 2: Жилеты -->
+                <div class="product-card">
+                    <div class="aspect-video product-image-placeholder bg-primary-brown/10 text-xl font-bold p-8">
+                        <img src="img/img-3.jpg" alt="">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h3 class="text-2xl font-serif font-bold text-primary-brown mb-2">Стильный жилет</h3>
+                        <p class="text-gray-600 mb-4">Комфорт и уникальный стиль. Тепло и легкость.</p>
+                        <a href="#" class="btn-secondary">Купить</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 3: Декор -->
+                <div class="product-card">
+                    <div class="aspect-video product-image-placeholder bg-accent-terracotta/10 text-xl font-bold p-8">
+                        <img src="img/img-4.jpg" alt="">
+                    </div>
+                    <div class="p-5 text-center">
+                        <h3 class="text-2xl font-serif font-bold text-primary-brown mb-2">Теплые декоры</h3>
+                        <p class="text-gray-600 mb-4">Элементы уюта: корзины, подставки и игрушки.</p>
+                        <a href="#" class="btn-secondary">Купить</a>
+                    </div>
+                </div>
+
+                <!-- Карточка 4: Шарфы (Новый товар) -->
+                <div class="product-card">
+                    <div class="aspect-video product-image-placeholder bg-primary-brown/10 text-xl font-bold p-8">
+                        [Изображение Мягких шарфов]
+                    </div>
+                    <div class="p-5 text-center">
+                        <h3 class="text-2xl font-serif font-bold text-primary-brown mb-2">Мягкие шарфы</h3>
+                        <p class="text-gray-600 mb-4">Легкий и согревающий шарф с уникальным узором.</p>
+                        <a href="#" class="btn-secondary">Купить</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="text-center mt-16">
+                <a href="#contact" class="btn-primary-lg">
+                    <i class="fas fa-gifts mr-3"></i> Заказать Индивидуальный Дизайн
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 4. О КОМПАНИИ (ABOUT) -->
+    <section id="about" class="bg-light-cream py-16 sm:py-24 border-b border-accent-terracotta/50 fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Магия Войлока</h2>
+            
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                
+                <!-- Левый блок: Изображение/Видео -->
+                <div class="lg:w-1/2 w-full">
+                    <div class="aspect-video w-full bg-dark-gray/10 rounded-xl shadow-2xl flex justify-center items-center p-8">
+                        [Видео или Фото процесса создания]
+                    </div>
+                    <p class="text-center text-sm text-gray-500 mt-4 italic">Наши мастера — настоящие волшебники, превращающие шерсть в шедевры.</p>
+                </div>
+                
+                <!-- Правый блок: Текст -->
+                <div class="lg:w-1/2 w-full space-y-6">
+                    <h3 class="text-3xl font-serif font-bold text-primary-brown">Что такое войлочные изделия?</h3>
+                    <p class="text-gray-700">Войлок — это материал, сделанный из натуральной шерсти, которая уплотняется под действием влаги, тепла и трения. Так рождается прочное, теплое и мягкое полотно. **Мы создаем не просто вещи, а маленькие шедевры, пропитанные теплом рук и любовью к своему делу.**</p>
+                    
+                    <ul class="space-y-3 list-none p-0 text-gray-700">
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-accent-terracotta mt-1 mr-3 flex-shrink-0"></i>
+                            <p>Сохраняют тепло, но **"дышат"** — ноги не потеют, телу комфортно.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-accent-terracotta mt-1 mr-3 flex-shrink-0"></i>
+                            <p>Гипоаллергенный — идеально для детей и чувствительной кожи.</p>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-star text-accent-terracotta mt-1 mr-3 flex-shrink-0"></i>
+                            <p>Износостойкий — служит годами, не теряя формы и красоты.</p>
+                        </li>
+                    </ul>
+                    <a href="#contact" class="text-primary-brown font-bold hover:text-accent-terracotta transition duration-300 inline-block mt-4 border-b-2 border-primary-brown/50">Узнать подробнее об уходе &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. О НАС / FAQ -->
+    <section class="py-16 sm:py-24 bg-white fade-in" id="about-faq">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- О нас (Левая колонка на десктопе) -->
+                <div class="md:col-span-1 border-r border-gray-200 md:pr-8">
+                    <h2 class="text-4xl font-serif font-bold text-primary-brown mb-6">О нас</h2> 
+                    <p class="text-lg mb-6 font-normal text-gray-700">
+                        Мы создаем не просто вещи, а маленькие шедевры из войлока. Каждое изделие пропитано теплом рук и любовью к своему делу.
+                    </p>
+                    <div class="bg-light-cream p-4 rounded-lg mb-6 shadow-inner border-l-4 border-accent-terracotta">
+                        <h3 class="text-xl font-serif font-bold text-dark-gray mb-1">Почему мы?</h3>
+                        <p class="text-dark-gray font-medium">Уникальность, качество, тепло</p>
+                    </div>
+                    
+                    <a href="#about" class="btn-secondary text-sm px-6 py-2 uppercase tracking-wider">
+                        Подробнее о Zapatos
+                    </a>
+                </div>
+
+                <!-- FAQ (Аккордеон - Правые две колонки на десктопе) -->
+                <div class="md:col-span-2 space-y-4">
+                    <h2 class="text-4xl font-serif font-bold text-primary-brown mb-8">Частые вопросы</h2>
+
+                    <!-- Вопрос 1 -->
+                    <details class="bg-light-cream p-5 rounded-xl shadow-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+                        <summary class="faq-summary text-xl font-medium text-dark-gray hover:text-primary-brown transition">Что такое войлочные изделия?</summary>
+                        <p class="text-gray-700 pt-3 border-t border-gray-200 mt-3 font-light">Войлок — это материал, сделанный из натуральной шерсти, которая уплотняется под действием влаги, тепла и трения. Так рождается прочное, теплое и мягкое полотно, из которого делают обувь, одежду, аксессуары и элементы декора. А также войлочные изделия: • сохраняют тепло даже во влажную погоду, • «дышат» — не создают парникового эффекта, • приятны на ощупь и создают ощущение домашнего уюта.</p>
+                    </details>
+                    
+                    <!-- Вопрос 2 -->
+                    <details class="bg-light-cream p-5 rounded-xl shadow-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+                        <summary class="faq-summary text-xl font-medium text-dark-gray hover:text-primary-brown transition">Как ухаживать за войлоком?</summary>
+                        <p class="text-gray-700 pt-3 border-t border-gray-200 mt-3 font-light">1. Стирайте вручную в прохладной воде (до 30°C) с мягким средством для шерсти. 2. Не выкручивайте — просто аккуратно отожмите воду. 3. Сушите на полотенце, вдали от батарей и прямого солнца. 4. Не используйте машинную сушку или отбеливатель. 5. Если нужно — отпарьте изделие через влажную ткань.</p>
+                    </details>
+                    
+                    <!-- Вопрос 3 -->
+                    <details class="bg-light-cream p-5 rounded-xl shadow-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+                        <summary class="faq-summary text-xl font-medium text-dark-gray hover:text-primary-brown transition">Почему именно войлок?</summary>
+                        <p class="text-gray-700 pt-3 border-t border-gray-200 mt-3 font-light">• Он тёплый, но «дышит» — ноги не потеют, телу комфортно. • Это 100% натуральный материал без пластика и синтетики. • Антибактериальный и гипоаллергенный — идеально для детей и чувствительной кожи. • Износостойкий — служит годами, не теряя формы. И главное — вещи из войлока хранят тепло рук мастера ❤️</p>
+                    </details>
+                    
+                    <!-- Вопрос 4: Сроки изготовления (НОВЫЙ) -->
+                    <details class="bg-light-cream p-5 rounded-xl shadow-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+                        <summary class="faq-summary text-xl font-medium text-dark-gray hover:text-primary-brown transition">Сколько времени занимает изготовление?</summary>
+                        <p class="text-gray-700 pt-3 border-t border-gray-200 mt-3 font-light">Каждое изделие создаётся вручную, поэтому время может немного отличаться. В среднем изготовление занимает **3–5 дней**.</p>
+                    </details>
+
+                    <!-- Вопрос 5: Доставка (НОВЫЙ) -->
+                    <details class="bg-light-cream p-5 rounded-xl shadow-lg cursor-pointer hover:bg-gray-100 transition duration-300">
+                        <summary class="faq-summary text-xl font-medium text-dark-gray hover:text-primary-brown transition">Доставка по всему миру?</summary>
+                        <p class="text-gray-700 pt-3 border-t border-gray-200 mt-3 font-light">Мы отправляем заказы в любую точку мира. Срок доставки зависит от страны и службы доставки:
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li>по Испании — обычно 2–5 дней,</li>
+                                <li>по Европе — 5–10 дней,</li>
+                                <li>в другие страны — от 2 и более недель.</li>
+                            </ul>
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    
+    <!-- 6. ОТЗЫВЫ (TESTIMONIALS) -->
+    <section id="testimonials" class="bg-light-cream py-16 sm:py-24 border-b border-accent-terracotta/50 fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="section-title">Наши Довольные Клиенты</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Отзыв 1 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-3xl text-accent-terracotta mb-4"></i>
+                    <p class="text-gray-700 mb-4 italic leading-relaxed">""</p>
+                    <p class="font-bold text-primary-brown text-lg">-</p>
+                </div>
+
+                <!-- Отзыв 2 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-3xl text-accent-terracotta mb-4"></i>
+                    <p class="text-gray-700 mb-4 italic leading-relaxed">""</p>
+                    <p class="font-bold text-primary-brown text-lg">-</p>
+                </div>
+
+                <!-- Отзыв 3 -->
+                <div class="testimonial-card">
+                    <i class="fas fa-quote-left text-3xl text-accent-terracotta mb-4"></i>
+                    <p class="text-gray-700 mb-4 italic leading-relaxed">""</p>
+                    <p class="font-bold text-primary-brown text-lg">-</p>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. КОНТАКТЫ (CONTACT) - Аккуратный вид -->
+    <section id="contact" class="bg-white py-16 sm:py-24 fade-in">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="section-title">Свяжитесь с нами</h2>
+
+            <div class="bg-light-cream p-8 sm:p-12 rounded-2xl shadow-2xl">
+                <h3 class="text-3xl font-serif font-bold text-primary-brown border-b pb-4 border-primary-brown/20 mb-10">Быстрая Связь</h3>
+                
+                <!-- Контакты: Горизонтальный ряд на десктопе, вертикальный на моб. -->
+                <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-12">
+                    
+                    <!-- 1. Телефон -->
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-phone-alt text-5xl text-accent-terracotta mb-4 p-4 bg-white rounded-full shadow-md"></i>
+                        <h4 class="font-bold text-xl text-primary-brown mb-1">Позвоните нам</h4>
+                        <a href="tel:+74951234567" class="text-2xl font-extrabold text-dark-gray hover:text-accent-terracotta transition duration-300">+7 (495) 123-45-67</a>
+                        <p class="text-gray-600 mt-2 text-sm">Пн-Пт, 9:00 - 18:00 (МСК)</p>
+                    </div>
+
+                    <!-- 2. Instagram -->
+                    <div class="flex flex-col items-center">
+                         <i class="fab fa-instagram text-5xl text-accent-terracotta mb-4 p-4 bg-white rounded-full shadow-md"></i>
+                        <h4 class="font-bold text-xl text-primary-brown mb-1">Наш Instagram</h4>
+                        <a href="https://instagram.com/zapatos_felt" target="_blank" class="text-2xl font-extrabold text-dark-gray hover:text-accent-terracotta transition duration-300">@zapatos_felt</a>
+                        <p class="text-gray-600 mt-2 text-sm">Быстрые ответы и фото новинок</p>
+                    </div>
+
+                    <!-- 3. Email -->
+                    <div class="flex flex-col items-center">
+                        <i class="fas fa-envelope text-5xl text-accent-terracotta mb-4 p-4 bg-white rounded-full shadow-md"></i>
+                        <h4 class="font-bold text-xl text-primary-brown mb-1">Email для вопросов</h4>
+                        <a href="mailto:info@zapatos.ru" class="text-2xl font-extrabold text-dark-gray hover:text-accent-terracotta transition duration-300">info@zapatos.ru</a>
+                        <p class="text-gray-600 mt-2 text-sm">Для официальных запросов</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary-brown p-8 sm:p-12 text-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="text-4xl font-serif font-extrabold mb-4 h1-lobster">Zapatos</div>
+            <p class="text-sm sm:text-base mb-4 opacity-80">&copy; 2025 Zapatos. Тепло Рук. Создаем магию из шерсти. От YelAr Jangir Armanov</p>
+            <div class="flex justify-center space-x-8 text-lg">
+                <a href="#hero" class="hover:text-accent-terracotta transition duration-300">Главная</a>
+                <a href="#products" class="hover:text-accent-terracotta transition duration-300">Коллекция</a>
+                <a href="#contact" class="hover:text-accent-terracotta transition duration-300">Контакты</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        
+        // JS для управления мобильным меню
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if(mobileMenuButton) {
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+                // Меняем иконку (гамбургер <-> крестик)
+                const icon = mobileMenuButton.querySelector('i');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                } else {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            });
+        }
+        
+        // Добавляем закрытие мобильного меню при клике на ссылку
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if(mobileMenu) mobileMenu.classList.add('hidden');
+                // Возвращаем иконку гамбургера
+                const icon = mobileMenuButton.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+        
+        // JS для Плавного Появления Блоков (Fade-in on scroll)
+        const observerOptions = {
+            root: null, // Использовать вьюпорт как область наблюдения
+            rootMargin: '0px',
+            threshold: 0.2 // Блок появится, когда 20% его будет видно
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Проверяем, если элемент виден в вьюпорте
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    // Перестаем наблюдать за элементом после того, как он стал видимым
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, observerOptions);
+
+        // Наблюдаем за всеми секциями с классом fade-in
+        document.querySelectorAll('.fade-in').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Глобальный обработчик для якорных ссылок: плавный скролл с учётом фиксированного хедера
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                // Если это ссылка на текущую страницу с якорем
+                if (href && href.startsWith('#') && href.length > 1) {
+                    const targetId = href.slice(1);
+                    const targetEl = document.getElementById(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        const header = document.querySelector('.header-sticky');
+                        const headerOffset = header ? header.offsetHeight : 0;
+                        const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 8; // небольшой отступ
+                        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                    }
+                }
+            });
+        });
+
+        // Специальный обработчик для кнопки .btn-primary-lg, чтобы гарантировать прокрутку к #products
+        document.querySelectorAll('a.btn-primary-lg[href="#products"]').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+                const targetEl = document.getElementById('products');
+                if (targetEl) {
+                    const header = document.querySelector('.header-sticky');
+                    const headerOffset = header ? header.offsetHeight : 0;
+                    const elementPosition = targetEl.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - headerOffset - 8;
+                    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+                } else {
+                    // fallback: установить хеш
+                    window.location.hash = '#products';
+                }
+            });
+        });
+
+        // ========== ПЕРЕВОДЧИК САЙТА ==========
+        const translations = {
+            ru: {
+                'nav.home': 'Главная',
+                'nav.features': 'Преимущества',
+                'nav.products': 'Коллекция',
+                'nav.about': 'О нас',
+                'nav.contact': 'Контакты',
+                'hero.title': 'Войлок от Zapatos.',
+                'hero.subtitle': 'Тепло и Уют Ручной Работы.',
+                'hero.description': 'Мы создаем уникальные войлочные изделия с душой. Почувствуйте тепло и уют, созданные вручную.',
+                'hero.button': 'Смотреть Коллекцию',
+                'features.title': 'Почему наш Войлок?',
+                'features.1.title': 'Ручная работа',
+                'features.1.desc': 'Каждое изделие создается с любовью и вниманием к деталям. Вы получаете уникальный предмет.',
+                'features.2.title': 'Натуральные материалы',
+                'features.2.desc': 'Используем только 100% натуральную шерсть без синтетики. Экологично и гипоаллергенно.',
+                'features.3.title': 'Магия Уюта',
+                'features.3.desc': 'Войлок "дышит", сохраняет тепло и дарит незабываемое ощущение домашнего комфорта.',
+                'features.4.title': 'Уникальный Дизайн',
+                'features.4.desc': 'Неповторимые узоры и формы, которые вы не найдете в обычных магазинах.',
+                'products.title': 'Наши Шедевры',
+                'products.subtitle': 'Выберите свой идеальный войлочный аксессуар — от уютных тапочек до стильных жилетов. Каждое изделие уникально.',
+                'product.1.name': 'Уютные тапочки',
+                'product.1.desc': 'Хит продаж. Согреют ваши ноги после долгого дня.',
+                'product.2.name': 'Стильный жилет',
+                'product.2.desc': 'Комфорт и уникальный стиль. Тепло и легкость.',
+                'product.3.name': 'Теплые декоры',
+                'product.3.desc': 'Элементы уюта: корзины, подставки и игрушки.',
+                'product.4.name': 'Мягкие шарфы',
+                'product.4.desc': 'Легкий и согревающий шарф с уникальным узором.',
+                'products.cta.button': 'Заказать Индивидуальный Дизайн',
+                'btn.buy': 'Купить',
+                'about.title': 'Магия Войлока',
+                'about.heading': 'Что такое войлочные изделия?',
+                'about.text': 'Войлок — это материал, сделанный из натуральной шерсти, которая уплотняется под действием влаги, тепла и трения. Так рождается прочное, теплое и мягкое полотно. Мы создаем не просто вещи, а маленькие шедевры, пропитанные теплом рук и любовью к своему делу.',
+                'about.point1': 'Сохраняют тепло, но "дышат" — ноги не потеют, телу комфортно.',
+                'about.point2': 'Гипоаллергенный — идеально для детей и чувствительной кожи.',
+                'about.point3': 'Износостойкий — служит годами, не теряя формы и красоты.',
+                'about.footer.section': 'О нас',
+                'about.faq.title': 'Частые вопросы',
+                'faq.q1': 'Что такое войлочные изделия?',
+                'faq.a1': 'Войлок — это материал, сделанный из натуральной шерсти, которая уплотняется под действием влаги, тепла и трения. Так рождается прочное, теплое и мягкое полотно, из которого делают обувь, одежду, аксессуары и элементы декора. А также войлочные изделия: • сохраняют тепло даже во влажную погоду, • «дышат» — не создают парникового эффекта, • приятны на ощупь и создают ощущение домашнего уюта.',
+                'faq.q2': 'Как ухаживать за войлоком?',
+                'faq.a2': '1. Стирайте вручную в прохладной воде (до 30°C) с мягким средством для шерсти. 2. Не выкручивайте — просто аккуратно отожмите воду. 3. Сушите на полотенце, вдали от батарей и прямого солнца. 4. Не используйте машинную сушку или отбеливатель. 5. Если нужно — отпарьте изделие через влажную ткань.',
+                'faq.q3': 'Почему именно войлок?',
+                'faq.a3': '• Он тёплый, но «дышит» — ноги не потеют, телу комфортно. • Это 100% натуральный материал без пластика и синтетики. • Антибактериальный и гипоаллергенный — идеально для детей и чувствительной кожи. • Износостойкий — служит годами, не теряя формы. И главное — вещи из войлока хранят тепло рук мастера ❤️',
+                'faq.q4': 'Сколько времени занимает изготовление?',
+                'faq.a4': 'Каждое изделие создаётся вручную, поэтому время может немного отличаться. В среднем изготовление занимает 3–5 дней.',
+                'faq.q5': 'Доставка по всему миру?',
+                'faq.a5': 'Мы отправляем заказы в любую точку мира. Срок доставки зависит от страны и службы доставки: • по России — обычно 2–5 дней, • по Европе — 5–10 дней, • в другие страны — от 2 и более недель.',
+                'testimonials.title': 'Наши Довольные Клиенты',
+                'contact.title': 'Свяжитесь с нами',
+                'contact.heading': 'Быстрая Связь',
+                'contact.phone': 'Позвоните нам',
+                'contact.instagram': 'Наш Instagram',
+                'contact.email': 'Email для вопросов',
+                'footer.copyright': '© 2025 Zapatos. Тепло Рук. Создаем магию из шерсти. От YelAr Jangir Armanov'
+            },
+            en: {
+                'nav.home': 'Home',
+                'nav.features': 'Features',
+                'nav.products': 'Collection',
+                'nav.about': 'About',
+                'nav.contact': 'Contact',
+                'hero.title': 'Felt from Zapatos.',
+                'hero.subtitle': 'Warmth and Coziness of Handmade Work.',
+                'hero.description': 'We create unique felt products with soul. Feel the warmth and coziness created by hand.',
+                'hero.button': 'View Collection',
+                'features.title': 'Why Our Felt?',
+                'features.1.title': 'Handmade Work',
+                'features.1.desc': 'Each product is created with love and attention to detail. You get a unique item.',
+                'features.2.title': 'Natural Materials',
+                'features.2.desc': 'We use only 100% natural wool without synthetics. Eco-friendly and hypoallergenic.',
+                'features.3.title': 'Magic of Coziness',
+                'features.3.desc': 'Felt "breathes", retains heat and gives an unforgettable feeling of home comfort.',
+                'features.4.title': 'Unique Design',
+                'features.4.desc': 'Unique patterns and shapes that you won\'t find in ordinary stores.',
+                'products.title': 'Our Masterpieces',
+                'products.subtitle': 'Choose your ideal felt accessory — from cozy slippers to stylish vests. Each product is unique.',
+                'product.1.name': 'Cozy Slippers',
+                'product.1.desc': 'Best seller. Will warm your feet after a long day.',
+                'product.2.name': 'Stylish Vest',
+                'product.2.desc': 'Comfort and unique style. Warmth and lightness.',
+                'product.3.name': 'Warm Décor',
+                'product.3.desc': 'Elements of coziness: baskets, stands and toys.',
+                'product.4.name': 'Soft Scarves',
+                'product.4.desc': 'Light and warming scarf with a unique pattern.',
+                'products.cta.button': 'Order Custom Design',
+                'btn.buy': 'Buy',
+                'about.title': 'Magic of Felt',
+                'about.heading': 'What are felt products?',
+                'about.text': 'Felt is a material made from natural wool that is compacted under the action of moisture, heat and friction. This creates a strong, warm and soft fabric. We create not just things, but small masterpieces filled with the warmth of hands and love for our craft.',
+                'about.point1': 'Retain heat, but "breathe" — feet don\'t sweat, the body is comfortable.',
+                'about.point2': 'Hypoallergenic — ideal for children and sensitive skin.',
+                'about.point3': 'Durable — lasts for years without losing shape and beauty.',
+                'about.footer.section': 'About Us',
+                'about.faq.title': 'Frequently Asked Questions',
+                'faq.q1': 'What are felt products?',
+                'faq.a1': 'Felt is a material made from natural wool that is compacted under the action of moisture, heat and friction. This creates a strong, warm and soft fabric used for shoes, clothing, accessories and décor elements. And felt products: • retain heat even in wet weather, • "breathe" — do not create a greenhouse effect, • are pleasant to the touch and create a feeling of home comfort.',
+                'faq.q2': 'How to care for felt?',
+                'faq.a2': '1. Hand wash in cool water (up to 30°C) with gentle wool detergent. 2. Don\'t wring — just gently squeeze out the water. 3. Dry on a towel, away from heaters and direct sunlight. 4. Don\'t use machine drying or bleach. 5. If needed — steam the product through a damp cloth.',
+                'faq.q3': 'Why felt specifically?',
+                'faq.a3': '• It\'s warm, but "breathes" — feet don\'t sweat, body is comfortable. • It\'s 100% natural material without plastic and synthetics. • Antibacterial and hypoallergenic — ideal for children and sensitive skin. • Durable — lasts for years without losing shape. And most importantly — felt products retain the warmth of the master\'s hands ❤️',
+                'faq.q4': 'How long does manufacturing take?',
+                'faq.a4': 'Each product is created by hand, so the time can vary slightly. On average, manufacturing takes 3–5 days.',
+                'faq.q5': 'Delivery worldwide?',
+                'faq.a5': 'We ship orders to any part of the world. Delivery time depends on the country and delivery service: • within USA — usually 2–5 days, • to Europe — 5–10 days, • to other countries — 2 weeks or more.',
+                'testimonials.title': 'Our Happy Customers',
+                'contact.title': 'Contact Us',
+                'contact.heading': 'Quick Contact',
+                'contact.phone': 'Call Us',
+                'contact.instagram': 'Our Instagram',
+                'contact.email': 'Email for Questions',
+                'footer.copyright': '© 2025 Zapatos. Warmth of Hands. Creating magic from wool. From YelAr Jangir Armanov'
+            },
+            es: {
+                'nav.home': 'Inicio',
+                'nav.features': 'Características',
+                'nav.products': 'Colección',
+                'nav.about': 'Acerca de',
+                'nav.contact': 'Contacto',
+                'hero.title': 'Fieltro de Zapatos.',
+                'hero.subtitle': 'Calidez y Comodidad del Trabajo Hecho a Mano.',
+                'hero.description': 'Creamos productos de fieltro únicos con alma. Sienta el calor y la comodidad creados a mano.',
+                'hero.button': 'Ver Colección',
+                'features.title': '¿Por qué nuestro Fieltro?',
+                'features.1.title': 'Trabajo Hecho a Mano',
+                'features.1.desc': 'Cada producto se crea con amor y atención al detalle. Obtienes un artículo único.',
+                'features.2.title': 'Materiales Naturales',
+                'features.2.desc': 'Utilizamos solo lana 100% natural sin sintéticos. Ecológico e hipoalergénico.',
+                'features.3.title': 'Magia de la Comodidad',
+                'features.3.desc': 'El fieltro "respira", retiene el calor y proporciona una sensación inolvidable de confort hogar.',
+                'features.4.title': 'Diseño Único',
+                'features.4.desc': 'Patrones y formas únicos que no encontrarás en tiendas ordinarias.',
+                'products.title': 'Nuestras Obras Maestras',
+                'products.subtitle': 'Elige tu accesorio de fieltro ideal — desde pantuflas acogedoras hasta chalecos elegantes. Cada producto es único.',
+                'product.1.name': 'Pantuflas Acogedoras',
+                'product.1.desc': 'Más vendido. Calentará tus pies después de un día largo.',
+                'product.2.name': 'Chaleco Elegante',
+                'product.2.desc': 'Comodidad y estilo único. Calor y ligereza.',
+                'product.3.name': 'Decoración Cálida',
+                'product.3.desc': 'Elementos de comodidad: cestas, soportes y juguetes.',
+                'product.4.name': 'Bufandas Suaves',
+                'product.4.desc': 'Bufanda ligera y cálida con un patrón único.',
+                'products.cta.button': 'Pedir Diseño Personalizado',
+                'btn.buy': 'Comprar',
+                'about.title': 'Magia del Fieltro',
+                'about.heading': '¿Qué son los productos de fieltro?',
+                'about.text': 'El fieltro es un material hecho de lana natural que se compacta bajo la acción de humedad, calor y fricción. Esto crea una tela fuerte, cálida y suave. Creamos no solo cosas, sino pequeñas obras maestras llenas del calor de las manos y el amor por nuestro oficio.',
+                'about.point1': 'Retienen calor, pero "respiran" — los pies no sudan, el cuerpo está cómodo.',
+                'about.point2': 'Hipoalergénico — ideal para niños y piel sensible.',
+                'about.point3': 'Duradero — dura años sin perder forma ni belleza.',
+                'about.footer.section': 'Acerca de Nosotros',
+                'about.faq.title': 'Preguntas Frecuentes',
+                'faq.q1': '¿Qué son los productos de fieltro?',
+                'faq.a1': 'El fieltro es un material hecho de lana natural que se compacta bajo la acción de humedad, calor y fricción. Esto crea una tela fuerte, cálida y suave utilizada para zapatos, ropa, accesorios y elementos decorativos. Y los productos de fieltro: • retienen calor incluso en clima húmedo, • "respiran" — no crean efecto invernadero, • son agradables al tacto y crean una sensación de confort hogar.',
+                'faq.q2': '¿Cómo cuidar el fieltro?',
+                'faq.a2': '1. Lavar a mano en agua fría (hasta 30°C) con detergente suave para lana. 2. No estrujes — simplemente exprime suavemente el agua. 3. Seca sobre una toalla, lejos de radiadores y luz solar directa. 4. No uses secadora ni blanqueador. 5. Si es necesario — vaporiza el producto a través de un paño húmedo.',
+                'faq.q3': '¿Por qué fieltro específicamente?',
+                'faq.a3': '• Es cálido, pero "respira" — los pies no sudan, el cuerpo está cómodo. • Es 100% material natural sin plástico ni sintéticos. • Antibacteriano e hipoalergénico — ideal para niños y piel sensible. • Duradero — dura años sin perder forma. Y lo más importante — los productos de fieltro retienen el calor de las manos del maestro ❤️',
+                'faq.q4': '¿Cuánto tiempo toma la fabricación?',
+                'faq.a4': 'Cada producto se crea a mano, por lo que el tiempo puede variar ligeramente. En promedio, la fabricación toma 3–5 días.',
+                'faq.q5': '¿Envío en todo el mundo?',
+                'faq.a5': 'Enviamos pedidos a cualquier parte del mundo. El tiempo de entrega depende del país y del servicio de entrega: • en España — generalmente 2–5 días, • en Europa — 5–10 días, • en otros países — 2 semanas o más.',
+                'testimonials.title': 'Nuestros Clientes Satisfechos',
+                'contact.title': 'Contáctenos',
+                'contact.heading': 'Contacto Rápido',
+                'contact.phone': 'Llámanos',
+                'contact.instagram': 'Nuestro Instagram',
+                'contact.email': 'Email para Preguntas',
+                'footer.copyright': '© 2025 Zapatos. Calor de Manos. Creando magia de lana. De YelAr Jangir Armanov'
+            },
+            kk: {
+                'nav.home': 'Басы',
+                'nav.features': 'Ерекшеліктер',
+                'nav.products': 'Коллекция',
+                'nav.about': 'Біз туралы',
+                'nav.contact': 'Байланыс',
+                'hero.title': 'Zapatos мүсінінен құрылған',
+                'hero.subtitle': 'Өлектің Жылы және Тіңдігі Қолмен Жасалған.',
+                'hero.description': 'Біз ерекше құнды мүсін өндіктерін жасаймыз. Қолмен жасалған жылы және ыңғайлылықты сезіңіз.',
+                'hero.button': 'Коллекцияны Қарау',
+                'features.title': 'Неге бізің Мүсін?',
+                'features.1.title': 'Қолмен Жасалған',
+                'features.1.desc': 'Әрбір өнім сүйіспеншілік пен назарға құрылып жасалады. Сіз ерекше бір зат аласыз.',
+                'features.2.title': 'Табиғи Материалдар',
+                'features.2.desc': 'Біз тек 100% табиғи жүні ғана қолданамыз. Экологиялық және гипоаллергенді.',
+                'features.3.title': 'Ыңғайлылық Сиқырлы',
+                'features.3.desc': 'Мүсін "тыс алады", жылуды сақтайды және үйдің ыңғайлылығын орындайды.',
+                'features.4.title': 'Ерекше Дизайн',
+                'features.4.desc': 'Әдеттегі дүкендерде табылмайтын ерекше өндіктер мен түлік.',
+                'products.title': 'Біздің Шедеврлер',
+                'products.subtitle': 'Өнінді мүсін аксессуарын таңдаңыз — ыңғайлы тапочкидан сәнді жилеткеге дейін. Әрбір өнім ерекше.',
+                'product.1.name': 'Ыңғайлы Тапочкилар',
+                'product.1.desc': 'Ең сатылған. Ұзақ күннің соңында аяғыңызды жылытады.',
+                'product.2.name': 'Сәнді Жилет',
+                'product.2.desc': 'Сәндік және ерекше стиль. Жылу және жеңілдік.',
+                'product.3.name': 'Жылы Безендіктер',
+                'product.3.desc': 'Ыңғайлылық элементтері: себеттер, тіректер және ойыншықтар.',
+                'product.4.name': 'Жұмсақ Таспалар',
+                'product.4.desc': 'Жеңіл және жылу таспасы ерекше өндік арқылы.',
+                'products.cta.button': 'Арнайы Дизайн Тапсырыс Беру',
+                'btn.buy': 'Сатып Алу',
+                'about.title': 'Мүсін Сиқырлы',
+                'about.heading': 'Мүсін өндіктері дегеніміз не?',
+                'about.text': 'Мүсін - табиғи жүннен жасалған материал, ол ылғалдың, жылудың және үйкелістің әсерінен қатайады. Бұл күшті, жылы және жұмсақ ткань жасайды. Біз жай ғана нәрсе емес, балалар құнды шедеврлерін жасап, қолдың жылуы мен өндіктің сүйіспеншілігімен толтырадық.',
+                'about.point1': 'Жылуды сақтап "тыс алады" - аяқтар тері ысыңдамайды, денесі ыңғайлы.',
+                'about.point2': 'Гипоаллергенді — балалар мен сезімтал теріге идеалды.',
+                'about.point3': 'Ұзақ сөзінде — бірнеше жыл немесе формасын және сұлулығын жоймай айтыла.',
+                'about.footer.section': 'Біз туралы',
+                'about.faq.title': 'Жиі Қойылатын Сұрақтар',
+                'faq.q1': 'Мүсін өндіктері дегеніміз не?',
+                'faq.a1': 'Мүсін - табиғи жүннен жасалған материал, ол ылғалдың, жылудың және үйкелістің әсерінен қатайады. Бұл аяқ киім, киім, аксессуарлар және ө bendзндік элементтерге қолданылатын күшті, жылы және жұмсақ ткань жасайды. Және мүсін өндіктері: • ылғал ауа-райында да жылуды сақтайды, • "тыс алады" — парниктік әсер жоқ, • докулерге ұнайды және үйдің ыңғайлылығын сезіндіреді.',
+                'faq.q2': 'Мүсінге қалай қараймыз?',
+                'faq.a2': '1. Суық сусында құйма жүн сабыны арқылы қолмен жуу (30°C дейін). 2. Сыйпалауға болмайды — тек сәлсеңе су сығыңыз. 3. Құйма ағындарының үстіне құрақ болып сегізіңіз, қыздырғыштардан және түге құндығы сәлт бүлінбесін. 4. Машиналық құрақты немесе сарғамауды пайдаланбаңыз. 5. Қажет болса — өндіктіңізді суық құйма арқылы буланыңыз.',
+                'faq.q3': 'Неге дәл мүсін?',
+                'faq.a3': '• Ол жылы, бірақ "тыс алады" — аяқтар тері ысыңдамайды, денесі ыңғайлы. • Ол 100% табиғи материал, пластик және синтетика жоқ. • Антибактериялық және гипоаллергенді — балалар мен сезімтал теріге идеалды. • Ұзақ сөзінде — бірнеше жыл формасын жоймай. Және ең көп — мүсін өндіктері мастердің қолдарының жылуын сақтайды ❤️',
+                'faq.q4': 'Дайындау қанша уақыт өтеді?',
+                'faq.a4': 'Әрбір өнім қолмен жасалады, сондықтан уақыт аздап өзгеруі мүмкін. Орташалай дайындау 3–5 күн өтеді.',
+                'faq.q5': 'Барлық әлемге жеткізу?',
+                'faq.a5': 'Біз тапсырысты әлемнің кез келген нүктесіне жеткіземіз. Жеткізу уақыты елге және жеткізу қызметіне байланысты: • Қазақстанда — әдеттегі 2–5 күн, • Еуропада — 5–10 күн, • басқа елдерде — 2 апта немесе одан көп.',
+                'testimonials.title': 'Біздің Қанағаттанған Тұтынушылар',
+                'contact.title': 'Бізге Байланысыңыз',
+                'contact.heading': 'Тез Байланыс',
+                'contact.phone': 'Бізге Қоңырау Шалыңыз',
+                'contact.instagram': 'Біздің Instagram',
+                'contact.email': 'Сұрақ Үшін Email',
+                'footer.copyright': '© 2025 Zapatos. Қолдардың Жылуы. Жүннен сиқырлы жасау. YelAr Jangir Armanov-дан'
+            }
+        };
+
+        // Инициализация переводчика
+        let currentLang = localStorage.getItem('selectedLanguage') || 'ru';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('selectedLanguage', lang);
+            applyTranslations();
+            updateLanguageUI();
+        }
+
+        function applyTranslations() {
+            const t = translations[currentLang];
+            if (!t) return;
+
+            // Навигация
+            document.querySelectorAll('a[href="#hero"]').forEach(el => {
+                if (el.classList.contains('nav-link')) el.textContent = t['nav.home'];
+            });
+            document.querySelectorAll('a[href="#features"]').forEach(el => {
+                if (el.classList.contains('nav-link')) el.textContent = t['nav.features'];
+            });
+            document.querySelectorAll('a[href="#products"]').forEach(el => {
+                if (el.classList.contains('nav-link')) el.textContent = t['nav.products'];
+            });
+            document.querySelectorAll('a[href="#about"]').forEach(el => {
+                if (el.classList.contains('nav-link')) el.textContent = t['nav.about'];
+            });
+            document.querySelectorAll('a[href="#contact"]').forEach(el => {
+                if (el.classList.contains('nav-link')) el.textContent = t['nav.contact'];
+            });
+
+            // Hero секция
+            const heroTitle = document.querySelector('h1.h1-lobster');
+            if (heroTitle) {
+                const span = heroTitle.querySelector('span');
+                heroTitle.textContent = t['hero.title'];
+                if (span) {
+                    const newSpan = document.createElement('span');
+                    newSpan.className = 'text-accent-terracotta block mt-4 font-normal font-serif';
+                    newSpan.textContent = t['hero.subtitle'];
+                    heroTitle.appendChild(newSpan);
+                }
+            }
+
+            const heroDesc = document.querySelector('.hero-content p');
+            if (heroDesc) heroDesc.textContent = t['hero.description'];
+
+            const heroBtn = document.querySelector('a.btn-primary-lg');
+            if (heroBtn) heroBtn.innerHTML = `<i class="fas fa-shopping-bag mr-3"></i> ${t['hero.button']}`;
+
+            // Features
+            const featuresTtl = document.querySelector('#features .section-title');
+            if (featuresTtl) featuresTtl.textContent = t['features.title'];
+
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards.forEach((card, idx) => {
+                const num = idx + 1;
+                const h3 = card.querySelector('h3');
+                const p = card.querySelector('p');
+                if (h3) h3.textContent = t[`features.${num}.title`];
+                if (p) p.textContent = t[`features.${num}.desc`];
+            });
+
+            // Products
+            const prodTtl = document.querySelector('#products .section-title');
+            if (prodTtl) prodTtl.textContent = t['products.title'];
+
+            const prodSub = document.querySelector('#products > div > p');
+            if (prodSub) prodSub.textContent = t['products.subtitle'];
+
+            const prodCards = document.querySelectorAll('.product-card');
+            prodCards.forEach((card, idx) => {
+                const num = idx + 1;
+                const h3 = card.querySelector('h3');
+                const p = card.querySelector('p');
+                const btn = card.querySelector('a.btn-secondary');
+                if (h3) h3.textContent = t[`product.${num}.name`];
+                if (p) p.textContent = t[`product.${num}.desc`];
+                if (btn) btn.textContent = t['btn.buy'];
+            });
+
+            // Footer
+            const footerCopy = document.querySelector('footer p');
+            if (footerCopy) footerCopy.textContent = t['footer.copyright'];
+        }
+
+        function updateLanguageUI() {
+            const langLabels = {
+                'ru': 'RU',
+                'en': 'EN',
+                'es': 'ES',
+                'kk': 'KK'
+            };
+            document.getElementById('current-lang-label').textContent = langLabels[currentLang];
+
+            // Обновляем галочку в меню
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                const check = opt.querySelector('i');
+                if (opt.dataset.lang === currentLang) {
+                    if (check) check.classList.remove('hidden');
+                } else {
+                    if (check) check.classList.add('hidden');
+                }
+            });
+        }
+
+        // Обработчики для кнопок переводчика
+        document.getElementById('lang-switcher-btn').addEventListener('click', () => {
+            const dropdown = document.getElementById('lang-dropdown');
+            dropdown.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.addEventListener('click', (e) => {
+                e.preventDefault();
+                const lang = opt.dataset.lang;
+                setLanguage(lang);
+                document.getElementById('lang-dropdown').classList.add('hidden');
+            });
+        });
+
+        // Закрытие дропдауна при клике вне
+        document.addEventListener('click', (e) => {
+            const switcher = document.getElementById('lang-switcher-btn');
+            const dropdown = document.getElementById('lang-dropdown');
+            if (!switcher.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // Применяем переводы при загрузке
+        applyTranslations();
+        updateLanguageUI();
+    </script>
+</body>
+</html>
